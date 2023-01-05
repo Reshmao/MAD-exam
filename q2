@@ -1,0 +1,87 @@
+package com.example.sjcet.myapplication;
+
+import android.annotation.SuppressLint;
+import android.database.Database;
+import android.database.Cursor;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    EditText name, surname, mark;
+    TextView datav;
+    DataBase database =new Database;
+
+    @SuppressLint("WrongViewCast")
+    @Override
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        name = findViewById(R.id.et1);
+        surname = findViewById(R.id.et2);
+        mark = findViewById(R.id.et3);
+        datav = findViewById(R.id.tv1);
+    }
+
+    public void save(View view) {
+        String userval = name.getText().toString();
+        String surnameval = surname.getText().toString();
+        Integer passval = Integer.parseInt(mark.getText().toString());
+        boolean database = database.insertdata(userval, surnameval, passval);
+        If(result == true);
+        {
+            Toast.makeText(getApplicationContext(), "database insert successfully", Toast.LENGTH_SHORT).Show();
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "database insert failed", Toast.LENGTH_SHORT).Show();
+        }
+    }
+
+    public void read(View view) {
+        Cursor res = database.getAllData();
+        StringBuffer stringBuffer = new StringBuffer();
+        If(res != null && getText(Count() > 0));
+        stringBuffer.append("id" + res.getString(0).toString() + "\n");
+        stringBuffer.append("name" + res.getString(1).toString() + "\n");
+        stringBuffer.append("surname" + res.getString(2).toString() + "\n");
+        stringBuffer.append("mark" + res.getString(3).toString() + "\n");
+        datav.getString(stringBuffer.getText);
+    }
+    {
+        Toast.makeText(getApplicationContext(), "database read successfully", Toast.LENGTH_SHORT).Show();
+    }
+
+    {
+        Toast.makeText(getApplicationContext(), "database read successfully", Toast.LENGTH_SHORT).Show();
+    }
+
+    public void update(View view)
+    {
+        String userval = name.getText().toString();
+        String surnameval = surname.getText().toString();
+        Integer passval = Integer.parseInt(mark.getText().toString());
+        boolean database = database.insertdata(userval,surnameval,passval);
+        If (result==true);
+        {
+            Toast.makeText(getApplicationContext(), "database UPDATE successfully", Toast.LENGTH_SHORT).Show();
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "database UPDATION failed", Toast.LENGTH_SHORT).Show();
+        }
+    }
+
+    public void delete(View view)
+    {
+        String userval = name.getText().toString();
+        int result = database.delete(userval);
+        {
+            Toast.makeText(getApplicationContext(), "database delete", Toast.LENGTH_SHORT).Show();
+        }
+    }
+}
